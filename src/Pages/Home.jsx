@@ -31,7 +31,7 @@ const Home = ({isAuth}) => {
         return (
           <div key={post.id} className="card mb-4 shadow shadow-sm">
             <div className="card-body">
-              {isAuth && post.author.uid === auth.currentUser.id ? <div className='d-flex justify-content-end'>
+              {isAuth && post.author.id === auth.currentUser.uid ? <div className='d-flex justify-content-end'>
                   <button className='btn btn-danger mt-2 mx-3 mb-3' 
                     onClick={() => {deletePost(post.id)}}>Delete</button>
                   </div> : <></>}    
