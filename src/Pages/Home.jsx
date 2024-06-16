@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import {getDocs, collection, deleteDoc, doc} from 'firebase/firestore'
 import {auth, db} from '../firebase-config'
+import { useSelector } from 'react-redux'
 
-const Home = ({isAuth}) => {
+const Home = () => {
+  const isAuth = useSelector((state) => state.auth.value);
+
   const [postLists, setPostLists] = useState([]);
   const [loading, setLoading] = useState(false);
   const postCollectionRef = collection(db, 'posts');

@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { addDoc, collection } from 'firebase/firestore';
 import {auth, db} from '../firebase-config'
 import { useNavigate } from 'react-router-dom';
-const CreateBlog = ({isAuth}) => {
+import { useSelector } from 'react-redux'
+const CreateBlog = () => {
+  const isAuth = useSelector((state) => state.auth.value)
+
   const[title, setTitle] = useState('');
   const[post, setPost] = useState('');
 

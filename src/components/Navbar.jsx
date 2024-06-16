@@ -2,15 +2,23 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import { signOut} from 'firebase/auth';
 import { auth } from '../firebase-config';
-const Navbar = ({isAuth, setIsAuth}) => {
+import { useSelector, useDispatch } from 'react-redux'
+import { authorise, deAuthorise } from '../auth/authSlice';
+
+const Navbar = () => {
+  const isAuth = useSelector((state) => state.auth.value);
+  const dispatch = useDispatch()
+
   const signUserOut = () => {
     signOut(auth).then(() => {
       localStorage.clear();
-      setIsAuth(false);
+      dispatch(deAuthorise);
       window.location.pathname = "/login";
     })
+    
 
   }
+  console.log(isAuth);
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <Link className="navbar-brand" to="/">AkashBLOG</Link>

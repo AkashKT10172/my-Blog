@@ -2,12 +2,17 @@ import React from 'react'
 import {auth , provider} from '../firebase-config';
 import { signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-const Login = ({setIsAuth}) => {
+import { useDispatch } from 'react-redux'
+import { authorise } from '../auth/authSlice'
+
+
+const Login = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider).then((result) => {
       localStorage.setItem('isAuth', true);
-      setIsAuth(true);
+      dispatch(authorise());
       navigate('/');
     })
   }
