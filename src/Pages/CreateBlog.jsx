@@ -1,13 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { addDoc, collection } from 'firebase/firestore';
-import {auth, db} from '../firebase-config'
+import {auth, db, imageDB} from '../firebase-config'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux'
+import { getDownloadURL, uploadBytes, ref } from 'firebase/storage';
+
 const CreateBlog = () => {
   const isAuth = useSelector((state) => state.auth.value)
 
   const[title, setTitle] = useState('');
   const[post, setPost] = useState('');
+
+  const [imgUrl, setImgUrl] = useState('')
+  const [img, setImg] = useState('')
+
+  const handleImageSubmit = async () => {
+      console.log(img);
+      const imgRef = ref(imageDB, "files/" + img.name)
+      await uploadBytes(imgRef, img)
+      const downloadURL = await getDownloadURL(imgRef)
+      console.log(downloadURL)
+      setImgUrl(downloadURL)
+  } 
+
 
   let navigate = useNavigate();
 
@@ -21,8 +36,9 @@ const CreateBlog = () => {
         await addDoc(postCollectionRef, {
           title,
           post,
+          imgUrl,
           author: {
-            name : auth.currentUser.displayName,
+            name : auth.currentUser.email,
             id: auth.currentUser.uid
           }
         })
@@ -38,12 +54,12 @@ const CreateBlog = () => {
       navigate('/login')
     }
   })
-
-
   return (
     <div className="container">
       <div className="bg-light p-5 rounded mt-3">
         <h1>Create a Post</h1>
+        <input type="file" onChange={(e) => setImg(e.target.files[0])}/>
+        <button onClick = {handleImageSubmit}>Upload</button>
         <div className="mb-3">
           <label htmlFor="title" className='form-label' >Title</label>
           <input type="text" placeholder='Title' 

@@ -1,9 +1,10 @@
 import React from 'react'
 import {auth , provider} from '../firebase-config';
-import { signInWithPopup } from 'firebase/auth';
+import { signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import { authorise } from '../auth/authSlice'
+import { useState } from 'react';
 
 
 const Login = () => {
@@ -16,6 +17,19 @@ const Login = () => {
       navigate('/');
     })
   }
+  const [email, setEmail] = useState('');
+  const [Pass, setPass] = useState('');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, Pass)
+    .then((userCredential) => {
+    const user = userCredential.user;
+    console.log(user);
+    localStorage.setItem('isAuth', true);
+    dispatch(authorise());
+    navigate('/');
+    })
+  }
   return (
      <div className="container">
       <div className="card mt-5 text-center">
@@ -25,6 +39,23 @@ const Login = () => {
           onClick={signInWithGoogle}>
             Google
           </button>
+        </div>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="email">Email</label>
+            <input type="email"
+            name='email'
+            required 
+            onChange={(e) => setEmail(e.target.value)}/>
+            <label htmlFor="pass">Password</label>
+            <input type="password"
+            name='pass'
+            required 
+            onChange={(e) => setPass(e.target.value)}/>
+            <button type='submit'>
+              SignIn
+            </button>
+          </form>
         </div>
       </div>
      </div>

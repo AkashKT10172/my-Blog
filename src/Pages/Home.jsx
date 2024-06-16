@@ -42,6 +42,7 @@ const Home = () => {
               <p className='card-title mb-3'>
                 {post.post}
               </p>
+              <img src={post.imgUrl} />
               <span className='badge bg-dark'>{post.author.name}</span>
             </div>
           </div>
