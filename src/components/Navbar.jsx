@@ -20,15 +20,15 @@ const Navbar = () => {
   }
   console.log(isAuth);
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-    <Link className="navbar-brand" to="/">AkashBLOG</Link>
-    <div className="navbar-nav">
-      <Link className="nav-item nav-link active" to="/">Home</Link>
-      {!isAuth ? <Link className="nav-item nav-link" to="/login">Log-In</Link> :
+    <nav className='flex sm:justify-between sm:flex-row flex-col items-center p-4 bg-green-400 opacity-85'>
+    <Link className='font-bold pb-2' to="/">AkashBLOG</Link>
+    <div className='sm:border-t-0 border-t-2 py-2'>
+      <Link className='mx-2' to="/">Home</Link>
+      {!isAuth ? <Link className='mx-2' to="/login">Log-In</Link> :
       (
         <>
-        <Link className="nav-item nav-link" to="/createblog">Create Post</Link>
-        <button className='btn btn-dark' onClick = {signUserOut}>Log-Out</button>
+        <Link className='mx-2' to="/createblog">Create Post</Link>
+        <button className='bg-teal-500 hover:bg-teal-700 text-black-400 font-bold sm:py-2 px-4 rounded-sm' onClick = {signUserOut}>Log-Out</button>
         </>
       )
       }

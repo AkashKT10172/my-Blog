@@ -7,10 +7,10 @@ import Login from './Pages/Login.jsx'
 const App = () => {
   return (
   <>
-  <div className="App">
+  <div>
     <Router>
       <Navbar/>
-      <div className="container">
+      <div>
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/login" element={<Login/>} />

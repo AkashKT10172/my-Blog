@@ -55,26 +55,28 @@ const CreateBlog = () => {
     }
   })
   return (
-    <div className="container">
-      <div className="bg-light p-5 rounded mt-3">
-        <h1>Create a Post</h1>
-        <input type="file" onChange={(e) => setImg(e.target.files[0])}/>
-        <button onClick = {handleImageSubmit}>Upload</button>
-        <div className="mb-3">
-          <label htmlFor="title" className='form-label' >Title</label>
-          <input type="text" placeholder='Title' 
-          className='form-control' 
+    <div className='bg-gray-800 h-screen'>
+      <div className='flex flex-col items-center'>
+       <h1 className='font-bold text-2xl text-blue-300 my-4'>CREATE A POST</h1>
+       <div className='border-2 border-gray-500 p-2 bg-teal-200 md:w-2/4 w-[90%]'>
+       <div className='sm:h-10 h-20 flex md:flex-row flex-col justify-between'>
+          <input type="file" onChange={(e) => setImg(e.target.files[0])}/>
+          <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick = {handleImageSubmit}>Upload</button>
+        </div>
+        <div className='w-full'>
+          <label htmlFor="title">Title</label>
+          <input className='w-full border-2 border-gray-500' type="text" placeholder='Title'  
           onChange={(e) => setTitle(e.target.value)}/>
         </div>
-        <div className="mb-3">
-          <label htmlFor="posts" className='form-label'>Title</label>
-          <textarea placeholder='Post...' 
+        <div className='h-64 w-full'>
+          <label htmlFor="posts">Post</label>
+          <textarea className='w-full h-[80%] border-2 border-gray-500' placeholder='Post...' 
           name="" id="" 
-          className='form-control'
           onChange={(e) => setPost(e.target.value)}/>
         </div>
-        <button className="btn btn-dark" onClick={createPost}>Publish</button>
+        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={createPost}>Publish</button>
       </div>
+       </div>
     </div>
   )
 }

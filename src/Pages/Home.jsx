@@ -26,24 +26,28 @@ const Home = () => {
       getPosts();
   }
   if(loading) {
-    return <h3>Loading....</h3>
+    return <h3 className='bg-gray-800 h-screen flex items-center justify-center text-white'>Loading....</h3>
   }
   return (
-    <div className="homepage mt-4">
+    <div>
       {postLists.length === 0 ? <h3>No Posts to show</h3> : postLists.map((post) => {
         return (
-          <div key={post.id} className="card mb-4 shadow shadow-sm">
-            <div className="card-body">
-              {isAuth && post.author.id === auth.currentUser.uid ? <div className='d-flex justify-content-end'>
-                  <button className='btn btn-danger mt-2 mx-3 mb-3' 
-                    onClick={() => {deletePost(post.id)}}>Delete</button>
-                  </div> : <></>}    
-              <h5 className='card-title mb-3 fw-bold'>{post.title}</h5>
-              <p className='card-title mb-3'>
+          <div key={post.id} className='flex flex-col items-center p-4 bg-gray-800'>
+            <div className='border-2 border-gray-600 flex lg:flex-row flex-col-reverse justify-center items-center mx-4 my-8 p-2 rounded-lg lg:w-2/4 w-full h-auto bg-teal-200'>
+              <div className='lg:w-2/4 w-full h-96 lg:mr-4 p-2 rounded-lg'>
+              <h5 className='text-black h-[15%] text-3xl font-semibold border-b-2 border-gray-500 flex items-center'>{post.title}</h5>
+              <p className={`${isAuth && post.author.id === auth.currentUser.uid ? "h-[65%]" : "h-[75%]"}`}>
                 {post.post}
               </p>
-              <img src={post.imgUrl} />
-              <span className='badge bg-dark'>{post.author.name}</span>
+              <h5 className='h-[10%] flex items-end border-t-2 border-gray-500'>Author : {post.author.name}</h5>
+              {isAuth && post.author.id === auth.currentUser.uid ? <div className='h-[10%]'>
+                  <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
+                    onClick={() => {deletePost(post.id)}}>Delete</button>
+              </div> : <></>}    
+              </div>
+              <div className='lg:w-2/4 w-full flex justify-end '>
+              <img src={post.imgUrl} className='lg:w-96 w-full h-96 object-cover' />
+              </div>
             </div>
           </div>
         )
