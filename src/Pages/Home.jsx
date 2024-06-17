@@ -34,9 +34,9 @@ const Home = () => {
         return (
           <div key={post.id} className='flex flex-col items-center p-4 bg-gray-800'>
             <div className='border-2 border-gray-600 flex lg:flex-row flex-col-reverse justify-center items-center mx-4 my-8 p-2 rounded-lg lg:w-2/4 w-full h-auto bg-teal-200'>
-              <div className='lg:w-2/4 w-full h-96 lg:mr-4 p-2 rounded-lg'>
+              <div className='lg:w-2/4 w-full sm:h-96 h-auto lg:mr-4 p-2 rounded-lg'>
               <h5 className='text-black h-[15%] text-3xl font-semibold border-b-2 border-gray-500 flex items-center'>{post.title}</h5>
-              <p className={`${isAuth && post.author.id === auth.currentUser.uid ? "h-[65%]" : "h-[75%]"}`}>
+              <p className={`${isAuth && post.author.id === auth.currentUser.uid ? "h-auto sm:h-[65%]" : "h-auto sm:h-[75%]"}`}>
                 {post.post}
               </p>
               <h5 className='h-[10%] flex items-end border-t-2 border-gray-500'>Author : {post.author.name}</h5>
