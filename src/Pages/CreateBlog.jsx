@@ -15,11 +15,10 @@ const CreateBlog = () => {
   const [img, setImg] = useState('')
 
   const handleImageSubmit = async () => {
-      console.log(img);
       const imgRef = ref(imageDB, "files/" + img.name)
       await uploadBytes(imgRef, img)
       const downloadURL = await getDownloadURL(imgRef)
-      console.log(downloadURL)
+      alert('image has been uploaded')
       setImgUrl(downloadURL)
   } 
 

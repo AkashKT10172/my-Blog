@@ -3,7 +3,8 @@ import {Link} from 'react-router-dom'
 import { signOut} from 'firebase/auth';
 import { auth } from '../firebase-config';
 import { useSelector, useDispatch } from 'react-redux'
-import { authorise, deAuthorise } from '../auth/authSlice';
+import { deAuthorise } from '../auth/authSlice';
+import logo from './BlogLogo.png'
 
 const Navbar = () => {
   const isAuth = useSelector((state) => state.auth.value);
@@ -18,10 +19,9 @@ const Navbar = () => {
     
 
   }
-  console.log(isAuth);
   return (
     <nav className='flex sm:justify-between sm:flex-row flex-col items-center p-4 bg-green-400 opacity-85'>
-    <Link className='font-bold pb-2' to="/">AkashBLOG</Link>
+    <Link className='font-bold' to="/"><img src={logo} className='h-16 w-20'></img></Link>
     <div className='sm:border-t-0 border-t-2 py-2'>
       <Link className='mx-2' to="/">Home</Link>
       {!isAuth ? <Link className='mx-2' to="/login">Log-In</Link> :
