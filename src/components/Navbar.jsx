@@ -20,7 +20,7 @@ const Navbar = () => {
 
   }
   return (
-    <nav className='flex sm:justify-between sm:flex-row flex-col items-center p-4 bg-green-400 opacity-85'>
+    <nav className='flex sm:justify-between sm:flex-row flex-col items-center p-4 bg-green-400 opacity-85 md:h-20'>
     <Link className='font-bold' to="/"><img src={logo} className='h-16 w-20'></img></Link>
     <div className='sm:border-t-0 border-t-2 py-2'>
       <Link className='mx-2' to="/">Home</Link>

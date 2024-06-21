@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import Home from './Pages/Home.jsx'
 import CreateBlog from './Pages/CreateBlog.jsx'
 import Login from './Pages/Login.jsx'
+import Footer from './components/Footer.jsx'
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/createblog" element={<CreateBlog/>} />
         </Routes>
       </div>
+      <Footer/>
     </Router>
   </div>
     
