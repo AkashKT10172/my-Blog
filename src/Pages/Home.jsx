@@ -32,7 +32,7 @@ const Home = () => {
     <div>
       {postLists.length === 0 ? <h3>No Posts to show</h3> : postLists.map((post) => {
         return (
-          <div key={post.id} className='flex flex-col items-center p-4 bg-gray-800 min-h-[calc(100vh-80px)]'>
+          <div key={post.id} className='flex flex-col items-center p-4 bg-gray-800'>
             <div className='border-2 border-gray-600 flex lg:flex-row flex-col-reverse justify-between items-center mx-4 my-8 p-2 rounded-lg lg:w-2/3 md:w-[75%] w-full h-auto bg-teal-200'>
               <div className='lg:w-2/4 w-full lg:min-h-96 h-auto lg:mr-4 p-2 rounded-lg'>
               <h5 className='text-black min-h-[15%] h-auto text-3xl font-semibold border-b-2 text-center border-gray-500 pb-2'>{post.title}</h5>

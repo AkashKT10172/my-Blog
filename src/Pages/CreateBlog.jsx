@@ -7,6 +7,7 @@ import { getDownloadURL, uploadBytes, ref } from 'firebase/storage';
 
 const CreateBlog = () => {
   const isAuth = useSelector((state) => state.auth.value)
+  const myUser = useSelector((state) => state.myUser.value)
 
   const[title, setTitle] = useState('');
   const[post, setPost] = useState('');
@@ -51,6 +52,8 @@ const CreateBlog = () => {
   useEffect(() => {
     if(!isAuth) {
       navigate('/login')
+    } else if (myUser !== "akashtiwary9303@gmail.com"){
+      navigate('/')
     }
   })
   return (

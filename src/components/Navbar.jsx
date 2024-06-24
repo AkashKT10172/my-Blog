@@ -4,10 +4,15 @@ import { signOut} from 'firebase/auth';
 import { auth } from '../firebase-config';
 import { useSelector, useDispatch } from 'react-redux'
 import { deAuthorise } from '../auth/authSlice';
+import { deAuthoriseUser } from '../auth/userSlice'
 import logo from './BlogLogo.png'
 
 const Navbar = () => {
   const isAuth = useSelector((state) => state.auth.value);
+  const myUser = useSelector((state) => state.myUser.value);
+
+  console.log(myUser);
+  
   const dispatch = useDispatch()
 
   const signUserOut = () => {
@@ -16,7 +21,6 @@ const Navbar = () => {
       dispatch(deAuthorise);
       window.location.pathname = "/login";
     })
-    
 
   }
   return (
@@ -27,7 +31,7 @@ const Navbar = () => {
       {!isAuth ? <Link className='mx-2' to="/login">Log-In</Link> :
       (
         <>
-        <Link className='mx-2' to="/createblog">Create Post</Link>
+        {myUser === "akashtiwary9303@gmail.com" ? <Link className='mx-2' to="/createblog">Create Post</Link> : <></>}
         <button className='bg-teal-500 hover:bg-teal-700 text-black-400 font-bold sm:py-2 px-4 rounded-sm' onClick = {signUserOut}>Log-Out</button>
         </>
       )
