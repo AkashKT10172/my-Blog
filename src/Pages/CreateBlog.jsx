@@ -15,9 +15,9 @@ const CreateBlog = () => {
   const [imgUrl, setImgUrl] = useState('')
   const [img, setImg] = useState('')
 
-  const currentDate = new Date().toISOString().split('T')[0];
+  const date = new Date().toISOString().split('T')[0];
   const time = new Date().getHours() + '-' + new Date().getMinutes() + '-' + new Date().getSeconds()
-  const date = currentDate + '-' + time
+  const currentDate = date + '-' + time
   //console.log(date)
   const handleImageSubmit = async () => {
       const imgRef = ref(imageDB, "files/" + img.name)
@@ -41,7 +41,7 @@ const CreateBlog = () => {
           title,
           post,
           imgUrl,
-          date,
+          currentDate,
           author: {
             name : auth.currentUser.email,
             id: auth.currentUser.uid
