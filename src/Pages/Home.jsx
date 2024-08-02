@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {getDocs, collection, deleteDoc, doc} from 'firebase/firestore'
 import {auth, db} from '../firebase-config'
 import { useSelector } from 'react-redux'
+import { query, orderBy, limit } from 'firebase/firestore';
 
 const Home = () => {
   const isAuth = useSelector((state) => state.auth.value);
@@ -10,9 +11,11 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const postCollectionRef = collection(db, 'posts');
 
+  const q = query(postCollectionRef, orderBy("currentDate", "desc"));
+
   const getPosts = async() => {
     setLoading(true);
-    const data = await getDocs(postCollectionRef);
+    const data = await getDocs(q);
     setPostLists(data.docs.map((doc) => ({...doc.data(), id:doc.id})))
     setLoading(false)
   }
@@ -32,8 +35,8 @@ const Home = () => {
     <div>
       {postLists.length === 0 ? <h3>No Posts to show</h3> : postLists.map((post) => {
         return (
-          <div key={post.id} className='flex flex-col items-center p-4 bg-gray-800'>
-            <div className='border-2 border-gray-600 flex lg:flex-row flex-col-reverse justify-between items-center mx-4 my-8 p-2 rounded-lg lg:w-2/3 md:w-[75%] w-full h-auto bg-teal-200'>
+          <div key={post.id} className='flex flex-col items-center p-4 bg-[#03071e]'>
+            <div className='border-2 border-gray-600 flex lg:flex-row flex-col-reverse justify-between items-center mx-4 my-8 p-2 rounded-lg lg:w-2/3 md:w-[75%] w-full h-auto bg-[#94d2bd]'>
               <div className='lg:w-2/4 w-full lg:min-h-96 h-auto lg:mr-4 p-2 rounded-lg'>
               <h5 className='text-black min-h-[15%] h-auto text-3xl font-semibold border-b-2 text-center border-gray-500 pb-2'>{post.title}</h5>
               <p className="h-auto lg:min-h-72 pb-4 text-justify">

@@ -4,11 +4,14 @@ import { signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import { authorise } from '../auth/authSlice'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { authoriseUser } from '../auth/userSlice';
+import { useSelector } from 'react-redux';
 
 
 const Login = () => {
+  const isAuth = useSelector((state) => state.auth.value)
+  console.log(isAuth)
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const signInWithGoogle = () => {
@@ -38,41 +41,50 @@ const Login = () => {
       alert('invalid credentials')
     })
   }
+  useEffect(() => {
+    if(isAuth) {
+      navigate('/')
+    }
+  })
   return (
-     <div className='bg-gray-800 h-screen flex justify-center'>
-      <div className='flex flex-col items-center sm:w-[400px] w-[300px]  mx-2 h-96 my-4 p-4 bg-teal-200 border-2 border-gray-500'>
-        <div className='flex items-center w-full justify-center p-4 text-black border-b-2 border-gray-500'>
-          <p >Sign In with Google </p>
-          <button className='ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-          onClick={signInWithGoogle}>
-            Google
-          </button>
-        </div>
+     <div className='bg-[#03071e] h-screen flex justify-center'>
+      <div className='flex flex-col items-center sm:w-[400px] w-[300px]  mx-2 h-96 my-4 p-4 bg-[#94d2bd] border-2 border-gray-500 rounded-md'>
+        
         <div className='w-full p-4'>
-          <form className='flex flex-col items-start w-full' onSubmit={handleSubmit}>
-            <label className='h-[25px]' htmlFor="email">Email</label>
+          <h1 className='sm:text-3xl text-2xl text-center mb-2'>Login to your account</h1>
+          <p className='text-center sm:text-md text-sm'>Don't have an account yet?
+          <span
+            className= 'mx-2 text-[#9d0208] underline hover:text-blue-600 cursor-pointer'
+            onClick={() => navigate('/register')}>
+              Sign Up
+          </span>
+          </p>
+          
+          <form className='mt-6 flex flex-col items-start w-full' onSubmit={handleSubmit}>
             <input type="email"
             name='email'
             required 
-            className='h-[40px] w-full border-2 border-black'
+            className='p-2 h-[40px] w-full border-2 border-gray-400 rounded-md'
+            placeholder='Email address'
             onChange={(e) => setEmail(e.target.value)}/>
-            <label className='h-[25px]' htmlFor="pass">Password</label>
             <input type="password"
             name='pass'
             required 
-            className='h-[40px] w-full border-2 border-black'
+            placeholder='Password'
+            className='mt-2 p-2 h-[40px] w-full border-2 border-gray-400 rounded-md'
             onChange={(e) => setPass(e.target.value)}/>
             <button 
-            className='mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+            className='w-full mt-2 hover:bg-[#6a040f] bg-[#9d0208] text-[#03071e] font-bold py-2 px-4 rounded-md'
             type='submit'>
-              SignIn
+              Login
             </button>
-            <p className='text-red-500'>Don't have an account?</p>
-            <button 
-            className='mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-            onClick={() => navigate('/register')}>
-              Sign Up
-            </button>
+            <div className='flex items-center w-full justify-center p-4 my-6 text-black border-t-2 border-gray-500'>
+              <p className='sm:text-md text-sm'>Login with Google </p>
+              <button className='ml-2 hover:bg-[#6a040f] bg-[#9d0208] text-[#03071e] font-bold py-2 sm:px-4 px-2 rounded-md'
+                onClick={signInWithGoogle}>
+                Google
+              </button>
+        </div>
           </form>
         </div>
       </div>
