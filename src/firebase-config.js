@@ -11,6 +11,7 @@ const firebaseConfig = {
   storageBucket: "myblog-295af.appspot.com",
   messagingSenderId: "1053605635361",
   appId: "1:1053605635361:web:46bc83665df1293489ca60",
+  //https://twitter.com/RajaramIndrajit/status/1580575941247766528
   databaseURL : "https://myblog-295af-default-rtdb.asia-southeast1.firebasedatabase.app/"
 };
 
